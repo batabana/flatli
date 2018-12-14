@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const db = require("./config/db.js");
 const csurf = require("csurf");
 const dvb = require("dvbjs");
+const moment = require("moment");
 
 // setup bodyparser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -84,6 +85,32 @@ app.get("/api/currentuser", async (req, res) => {
         res.json(user);
     } catch (err) {
         console.log("error in get /api/currentuser", err);
+        res.json({ success: false });
+    }
+});
+
+app.get("/api/dates", async (req, res) => {
+    try {
+        const dates = await db.getDates();
+        dates.map(item => {
+            item.start = moment(item.start).format("DD.MM.YYYY");
+            item.end = moment(item.end).format("DD.MM.YYYY");
+            return item;
+        });
+        res.json(dates);
+    } catch (err) {
+        console.log("error in get /api/dates", err);
+        res.json({ success: false });
+    }
+});
+
+app.post("/api/add-date", async (req, res) => {
+    try {
+        const { start, end, title } = req.body;
+        const { results } = await db.saveDate(title, start, end);
+        res.json(results);
+    } catch (err) {
+        console.log("error in get /api/add-date", err);
         res.json({ success: false });
     }
 });

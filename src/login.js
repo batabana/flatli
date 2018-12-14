@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "./axios";
+import DvbMonitor from "./dvb";
 
 export default class Login extends React.Component {
     constructor() {
@@ -35,10 +36,16 @@ export default class Login extends React.Component {
         });
         return (
             <div className="login-container">
-                <div id="leftHalf">
+                <div className="leftHalf">
                     <img src="/acat.jpg" id="acat" />
                 </div>
-                <div id="rightHalf">{arrOfUsers}</div>
+                <div className="rightHalf">
+                    <div>
+                        <DvbMonitor />
+                        <img src="wifi-code.png" alt="QR-Code for WiFi" className="qr-code" />
+                    </div>
+                    <div>{arrOfUsers}</div>
+                </div>
             </div>
         );
     }

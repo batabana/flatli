@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "./axios";
-import DvbMonitor from "./dvb";
+import Dates from "./dates";
 
 export default class App extends React.Component {
     constructor() {
@@ -25,7 +25,7 @@ export default class App extends React.Component {
                     <div className="user-icon">{currUser.id}</div>
                 </header>
                 <div className="app-container">
-                    <DvbMonitor />
+                    <Dates />
                 </div>
             </div>
         );

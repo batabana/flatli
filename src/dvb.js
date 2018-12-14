@@ -9,7 +9,6 @@ export default class DvbMonitor extends React.Component {
     }
 
     async refreshData() {
-        console.log("refresh!");
         const { data } = await axios.get("/api/public/");
         this.setState({
             departures: data
@@ -28,7 +27,7 @@ export default class DvbMonitor extends React.Component {
             <div className="dvb-container">
                 <header>
                     <img src="/stop.png" />
-                    <span id="dvb-headline">Wasaplatz</span>
+                    <span className="dvb-headline">Wasaplatz</span>
                     <img src="/reload.png" onClick={this.refreshData} />
                 </header>
                 <div className="lines-header">
