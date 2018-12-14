@@ -101,9 +101,36 @@
 }
 
 .app-container {
-    margin: 10px;
+    margin: 1em;
+    display: flex;
 }
 
 header .user-icon {
     float: right;
+}
+
+.date-container {
+    padding: 1em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.date-container > p {
+    text-align: center;
+}
+
+.dates {
+    width: 400px;
+    display: grid;
+    grid-template-columns: 20% 70% 10%;
+    align-items: center;
+}
+
+.dates p {
+    font-size: 12px;
+    color: #696969;
+}
+
+.icon {
+    width: 20px;
+    cursor: pointer;
 }

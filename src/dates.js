@@ -4,9 +4,10 @@ import axios from "./axios";
 export default class Dates extends React.Component {
     constructor() {
         super();
-        this.state = {};
+        this.state = { showDateAdder: false };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.deleteDate = this.deleteDate.bind(this);
     }
 
     async componentDidMount() {
@@ -16,8 +17,8 @@ export default class Dates extends React.Component {
         });
     }
 
-    async handleChange(e) {
-        await this.setState({
+    handleChange(e) {
+        this.setState({
             [e.target.name]: e.target.value
         });
     }
@@ -25,7 +26,13 @@ export default class Dates extends React.Component {
     async handleSubmit(e) {
         e.preventDefault();
         const { data } = await axios.post("/api/add-date", this.state);
-        !data.success && this.setState({ error: data.err });
+        data.success && this.setState({ dates: this.state.dates.concat(data.date), showDateAdder: false });
+    }
+
+    async deleteDate(e) {
+        let deleteId = e.target.id;
+        const { data } = await axios.get("/api/delete-date/" + deleteId);
+        data.success && this.setState({ dates: this.state.dates.filter(user => user.id != deleteId) });
     }
 
     render() {
@@ -33,16 +40,27 @@ export default class Dates extends React.Component {
             return null;
         }
         return (
-            <div>
-                <h1>Dates</h1>
+            <div className="date-container">
                 {this.state.dates.map(item => {
                     return (
                         <div key={item.id} className="dates">
-                            {item.title} {item.start}-{item.end}
+                            <p>
+                                {item.start}
+                                <br />
+                                {item.end}
+                            </p>
+                            <span>{item.title}</span>
+                            <img src="trash.png" className="icon" onClick={this.deleteDate} id={item.id} />
                         </div>
                     );
                 })}
-                <span onClick={() => this.setState({ showDateAdder: true })}>Add new date</span>
+                <p>
+                    <img
+                        src="plus.png"
+                        className="icon"
+                        onClick={() => this.setState({ showDateAdder: !this.state.showDateAdder })}
+                    />
+                </p>
                 {this.state.showDateAdder && (
                     <form onSubmit={this.handleSubmit}>
                         <input onChange={this.handleChange} name="start" type="date" />

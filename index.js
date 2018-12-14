@@ -93,8 +93,8 @@ app.get("/api/dates", async (req, res) => {
     try {
         const dates = await db.getDates();
         dates.map(item => {
-            item.start = moment(item.start).format("DD.MM.YYYY");
-            item.end = moment(item.end).format("DD.MM.YYYY");
+            item.start = moment(item.start).format("DD.MM.YY");
+            item.end = moment(item.end).format("DD.MM.YY");
             return item;
         });
         res.json(dates);
@@ -107,10 +107,22 @@ app.get("/api/dates", async (req, res) => {
 app.post("/api/add-date", async (req, res) => {
     try {
         const { start, end, title } = req.body;
-        const { results } = await db.saveDate(title, start, end);
-        res.json(results);
+        const date = await db.saveDate(title, start, end);
+        date[0].start = moment(date[0].start).format("DD.MM.YY");
+        date[0].end = moment(date[0].end).format("DD.MM.YY");
+        res.json({ success: true, date });
     } catch (err) {
         console.log("error in get /api/add-date", err);
+        res.json({ success: false });
+    }
+});
+
+app.get("/api/delete-date/:id", async (req, res) => {
+    try {
+        await db.deleteDate(req.params.id);
+        res.json({ success: true });
+    } catch (err) {
+        console.log("error in get /api/delete-date", err);
         res.json({ success: false });
     }
 });
