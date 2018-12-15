@@ -13,9 +13,14 @@ exports.getUserById = async id => {
     return rows;
 };
 
-exports.getDates = async () => {
-    const query = `SELECT * FROM dates WHERE "end" >= NOW() - INTERVAL '1 day' ORDER BY start ASC LIMIT 5`;
-    const { rows } = await db.query(query);
+exports.getDates = async (bottom, top) => {
+    const query = `
+    SELECT * FROM
+        (SELECT ROW_NUMBER() OVER (ORDER BY start ASC) AS row, *
+        FROM dates
+        WHERE "end" >= NOW() - INTERVAL '1 day') AS rows
+    WHERE row BETWEEN $1 AND $2`;
+    const { rows } = await db.query(query, [bottom, top]);
     return rows;
 };
 

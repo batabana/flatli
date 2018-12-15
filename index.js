@@ -89,9 +89,11 @@ app.get("/api/currentuser", async (req, res) => {
     }
 });
 
-app.get("/api/dates", async (req, res) => {
+app.get("/api/dates/:batch", async (req, res) => {
+    const top = req.params.batch * 5;
+    const bottom = top - 4;
     try {
-        const dates = await db.getDates();
+        const dates = await db.getDates(bottom, top);
         dates.map(item => {
             item.start = moment(item.start).format("DD.MM.YY");
             item.end = moment(item.end).format("DD.MM.YY");

@@ -3,6 +3,17 @@
     margin: 0;
 }
 
+input,
+button,
+textarea {
+    padding: 5px;
+    margin: 2px;
+    border-radius: 5px;
+    font-size: 11px;
+    border: 1px solid #509aaf;
+    width: 85px;
+}
+
 .leftHalf {
     background: #1a181b;
     width: 50%;
@@ -105,7 +116,8 @@
     display: flex;
 }
 
-header .user-icon {
+header .user-icon,
+header .icon {
     float: right;
 }
 
@@ -114,8 +126,15 @@ header .user-icon {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.date-container > p {
-    text-align: center;
+.date-container header {
+    margin-bottom: 10px;
+    margin-right: 20px;
+}
+
+.date-container .icons {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
 }
 
 .dates {
@@ -123,11 +142,17 @@ header .user-icon {
     display: grid;
     grid-template-columns: 20% 70% 10%;
     align-items: center;
+    margin: 2px;
 }
 
 .dates p {
     font-size: 12px;
     color: #696969;
+}
+
+.date-container form {
+    display: flex;
+    align-items: center;
 }
 
 .icon {
