@@ -68,13 +68,41 @@ export default class Dates extends React.Component {
                 </header>
                 {this.state.dates.map(item => {
                     return (
-                        <div key={item.id} className="dates">
+                        <div
+                            key={item.id}
+                            className="dates"
+                            style={{
+                                backgroundColor:
+                                    this.state.showAskSure && item.id == this.state.deleteId
+                                        ? "rgba(255,228,225,0.3)"
+                                        : "#FFFFFF"
+                            }}
+                        >
                             <p>
                                 {item.start}
                                 <br />- {item.end}
                             </p>
                             <span>{item.title}</span>
-                            <img src="trash.png" className="icon" onClick={this.deleteDate} id={item.id} />
+                            <div>
+                                {this.state.showAskSure && item.id == this.state.deleteId ? (
+                                    <div>
+                                        <img src="check.png" className="icon" id={item.id} onClick={this.deleteDate} />{" "}
+                                        <img
+                                            src="cross.png"
+                                            className="icon"
+                                            id={item.id}
+                                            onClick={() => this.setState({ showAskSure: false, deleteId: 0 })}
+                                        />
+                                    </div>
+                                ) : (
+                                    <img
+                                        src="trash.png"
+                                        className="icon"
+                                        id={item.id}
+                                        onClick={() => this.setState({ showAskSure: true, deleteId: item.id })}
+                                    />
+                                )}
+                            </div>
                         </div>
                     );
                 })}
@@ -85,7 +113,7 @@ export default class Dates extends React.Component {
                         <div className="icon" />
                     )}
                     <img
-                        src="plus.png"
+                        src={this.state.showDateAdder ? "cross.png" : "plus.png"}
                         className="icon"
                         onClick={() => this.setState({ showDateAdder: !this.state.showDateAdder })}
                     />

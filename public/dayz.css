@@ -61,6 +61,7 @@
     border-right: 1px solid #b6b6b6;
     border-bottom: 1px solid #b6b6b6;
     box-sizing: border-box;
+    min-height: 60px;
 }
 .dayz .day .event > * {
     height: 100%;
@@ -182,6 +183,9 @@
     position: relative;
     border: 1px solid #b6b6b6;
     border-radius: 4px;
+}
+.evbody {
+    font-size: 12px;
 }
 .dayz .event.color-1 .evbody {
     background: #4d4d4d;

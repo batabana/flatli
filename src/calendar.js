@@ -7,12 +7,11 @@ import { Link } from "react-router-dom";
 export default class Calendar extends React.Component {
     constructor(props) {
         super(props);
-        this.changeDisplay = this.changeDisplay.bind(this);
-        const date = moment(Date.now());
         this.state = {
-            date,
+            date: moment(Date.now()),
             display: "month"
         };
+        this.changeDisplay = this.changeDisplay.bind(this);
     }
 
     async componentDidMount() {
@@ -35,8 +34,29 @@ export default class Calendar extends React.Component {
     render() {
         return (
             <div className="dayz-wrapper">
-                <Dayz {...this.state} highlightDays={[this.state.date]} />
-                <Link to="/">Go back</Link>
+                <h3>{moment(this.state.date).format("MMMM YYYY")}</h3>
+                <div>
+                    <img
+                        src="left.png"
+                        className="icon"
+                        onClick={() => {
+                            this.setState({ date: moment(this.state.date).add(-1, "M") });
+                        }}
+                    />
+                    <Dayz {...this.state} highlightDays={[this.state.date]} />
+                    <img
+                        src="right.png"
+                        className="icon"
+                        onClick={() => {
+                            this.setState({ date: moment(this.state.date).add(1, "M") });
+                        }}
+                    />
+                </div>
+                <div>
+                    <Link to="/" className="fake-button">
+                        Go back
+                    </Link>
+                </div>
             </div>
         );
     }
