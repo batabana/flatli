@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "./axios";
+import { Link } from "react-router-dom";
 
 export default class Dates extends React.Component {
     constructor() {
@@ -15,12 +16,13 @@ export default class Dates extends React.Component {
 
     async getDates() {
         const { data } = await axios.get("/api/dates/" + this.state.batch);
-        await this.setState({
-            dates: data
-        });
+        data.success &&
+            this.setState({
+                dates: data.dates
+            });
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         this.getDates();
     }
 
@@ -60,11 +62,9 @@ export default class Dates extends React.Component {
             <div className="date-container">
                 <header>
                     <b>guests | away</b>
-                    <img
-                        src="calendar.png"
-                        className="icon"
-                        onClick={() => this.setState({ showDateAdder: !this.state.showDateAdder })}
-                    />
+                    <Link to="/calendar">
+                        <img src="calendar.png" className="icon" />
+                    </Link>
                 </header>
                 {this.state.dates.map(item => {
                     return (

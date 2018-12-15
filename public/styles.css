@@ -121,7 +121,8 @@ header .icon {
     float: right;
 }
 
-.date-container {
+.date-container,
+.dayz-wrapper {
     padding: 1em;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
@@ -158,4 +159,8 @@ header .icon {
 .icon {
     width: 20px;
     cursor: pointer;
+}
+
+.dayz-wrapper {
+    width: 75%;
 }

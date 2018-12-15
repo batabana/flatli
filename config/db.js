@@ -13,7 +13,7 @@ exports.getUserById = async id => {
     return rows;
 };
 
-exports.getDates = async (bottom, top) => {
+exports.getDateBatch = async (bottom, top) => {
     const query = `
     SELECT * FROM
         (SELECT ROW_NUMBER() OVER (ORDER BY start ASC) AS row, *
@@ -21,6 +21,13 @@ exports.getDates = async (bottom, top) => {
         WHERE "end" >= NOW() - INTERVAL '1 day') AS rows
     WHERE row BETWEEN $1 AND $2`;
     const { rows } = await db.query(query, [bottom, top]);
+    return rows;
+};
+
+exports.getAllDates = async () => {
+    const query = `
+    SELECT * FROM dates`;
+    const { rows } = await db.query(query);
     return rows;
 };
 

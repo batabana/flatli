@@ -10,9 +10,10 @@ export default class DvbMonitor extends React.Component {
 
     async refreshData() {
         const { data } = await axios.get("/api/public/");
-        this.setState({
-            departures: data
-        });
+        data.success &&
+            this.setState({
+                departures: data.data
+            });
     }
 
     async componentDidMount() {

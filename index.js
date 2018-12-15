@@ -57,7 +57,7 @@ app.get("/api/public", async (req, res) => {
 
     try {
         const data = await dvb.monitor(stopID, timeOffset, numResults);
-        res.json(data);
+        res.json({ success: true, data });
     } catch (err) {
         console.log("error in get /api/public", err);
         res.json({ success: false });
@@ -93,15 +93,25 @@ app.get("/api/dates/:batch", async (req, res) => {
     const top = req.params.batch * 5;
     const bottom = top - 4;
     try {
-        const dates = await db.getDates(bottom, top);
+        const dates = await db.getDateBatch(bottom, top);
         dates.map(item => {
             item.start = moment(item.start).format("DD.MM.YY");
             item.end = moment(item.end).format("DD.MM.YY");
             return item;
         });
-        res.json(dates);
+        res.json({ success: true, dates });
     } catch (err) {
-        console.log("error in get /api/dates", err);
+        console.log("error in get /api/dates/batch", err);
+        res.json({ success: false });
+    }
+});
+
+app.get("/api/all-dates", async (req, res) => {
+    try {
+        const dates = await db.getAllDates();
+        res.json({ success: true, dates });
+    } catch (err) {
+        console.log("error in get /api/all-dates", err);
         res.json({ success: false });
     }
 });
