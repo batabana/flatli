@@ -27,9 +27,9 @@ export default class DvbMonitor extends React.Component {
         return (
             <div className="dvb-container">
                 <header>
-                    <img src="/stop.png" />
+                    <img src="/icons/stop.png" />
                     <span className="dvb-headline">Wasaplatz</span>
-                    <img src="/reload.png" onClick={this.refreshData} />
+                    <img src="/icons/reload.png" onClick={this.refreshData} />
                 </header>
                 <div className="lines-header">
                     <span>line</span>

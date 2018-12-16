@@ -69,7 +69,7 @@ app.get("/api/users", async (req, res) => {
         const users = await db.getUsers();
         res.json(users);
     } catch (err) {
-        console.log("error in get /api/currentuser", err);
+        console.log("error in get /api/users", err);
         res.json({ success: false });
     }
 });
@@ -135,6 +135,28 @@ app.get("/api/delete-date/:id", async (req, res) => {
         res.json({ success: true });
     } catch (err) {
         console.log("error in get /api/delete-date", err);
+        res.json({ success: false });
+    }
+});
+
+app.get("/api/all-drinks", async (req, res) => {
+    try {
+        const drinks = await db.getAllDrinks(req.session.userId);
+        res.json({ success: true, drinks });
+    } catch (err) {
+        console.log("error in get /api/all-drinks", err);
+        res.json({ success: false });
+    }
+});
+
+app.get("/api/add-drink/:id", async (req, res) => {
+    const user = req.session.userId;
+    const drink = req.params.id;
+    try {
+        await db.saveDrink(user, drink);
+        res.json({ success: true });
+    } catch (err) {
+        console.log("error in get /api/add-drink", err);
         res.json({ success: false });
     }
 });

@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "./axios";
-import Dates from "./dates";
+import Main from "./main";
+
 import { BrowserRouter, Route } from "react-router-dom";
 import Calendar from "./calendar";
 
@@ -19,14 +20,16 @@ export default class App extends React.Component {
         if (!this.state.user) {
             return null;
         }
-        // const currUser = this.state.user[0];
-
+        const currUser = this.state.user[0];
         return (
             <div>
                 <div className="app-container">
                     <BrowserRouter>
                         <div>
-                            <Route exact path="/" component={Dates} />
+                            <header>
+                                <div className="user-icon">{currUser.id}</div>
+                            </header>
+                            <Route exact path="/" render={() => <Main credit={this.state.user[0].credit} />} />
                             <Route path="/calendar" render={() => <Calendar date={Date.now()} />} />
                         </div>
                     </BrowserRouter>
@@ -35,7 +38,3 @@ export default class App extends React.Component {
         );
     }
 }
-
-// <header>
-//     <div className="user-icon">{currUser.id}</div>
-// </header>

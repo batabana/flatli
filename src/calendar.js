@@ -37,7 +37,7 @@ export default class Calendar extends React.Component {
                 <h3>{moment(this.state.date).format("MMMM YYYY")}</h3>
                 <div>
                     <img
-                        src="left.png"
+                        src="icons/left.png"
                         className="icon"
                         onClick={() => {
                             this.setState({ date: moment(this.state.date).add(-1, "M") });
@@ -45,7 +45,7 @@ export default class Calendar extends React.Component {
                     />
                     <Dayz {...this.state} highlightDays={[this.state.date]} />
                     <img
-                        src="right.png"
+                        src="icons/right.png"
                         className="icon"
                         onClick={() => {
                             this.setState({ date: moment(this.state.date).add(1, "M") });

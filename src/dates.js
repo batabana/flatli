@@ -61,9 +61,9 @@ export default class Dates extends React.Component {
         return (
             <div className="date-container">
                 <header>
-                    <b>guests | away</b>
+                    <h4>guests | away</h4>
                     <Link to="/calendar">
-                        <img src="calendar.png" className="icon" />
+                        <img src="icons/calendar.png" className="icon" />
                     </Link>
                 </header>
                 {this.state.dates.map(item => {
@@ -83,12 +83,17 @@ export default class Dates extends React.Component {
                                 <br />- {item.end}
                             </p>
                             <span>{item.title}</span>
-                            <div>
+                            <div className="delete-icons">
                                 {this.state.showAskSure && item.id == this.state.deleteId ? (
                                     <div>
-                                        <img src="check.png" className="icon" id={item.id} onClick={this.deleteDate} />{" "}
                                         <img
-                                            src="cross.png"
+                                            src="icons/check.png"
+                                            className="icon"
+                                            id={item.id}
+                                            onClick={this.deleteDate}
+                                        />{" "}
+                                        <img
+                                            src="icons/cross.png"
                                             className="icon"
                                             id={item.id}
                                             onClick={() => this.setState({ showAskSure: false, deleteId: 0 })}
@@ -96,7 +101,7 @@ export default class Dates extends React.Component {
                                     </div>
                                 ) : (
                                     <img
-                                        src="trash.png"
+                                        src="icons/trash.png"
                                         className="icon"
                                         id={item.id}
                                         onClick={() => this.setState({ showAskSure: true, deleteId: item.id })}
@@ -108,17 +113,17 @@ export default class Dates extends React.Component {
                 })}
                 <div className="icons">
                     {this.state.batch > 1 ? (
-                        <img src="left.png" className="icon" onClick={this.handleLeftClick} />
+                        <img src="icons/left.png" className="icon" onClick={this.handleLeftClick} />
                     ) : (
                         <div className="icon" />
                     )}
                     <img
-                        src={this.state.showDateAdder ? "cross.png" : "plus.png"}
+                        src={this.state.showDateAdder ? "icons/cross.png" : "icons/plus.png"}
                         className="icon"
                         onClick={() => this.setState({ showDateAdder: !this.state.showDateAdder })}
                     />
                     {this.state.dates.length >= 5 ? (
-                        <img src="right.png" className="icon" onClick={this.handleRightClick} />
+                        <img src="icons/right.png" className="icon" onClick={this.handleRightClick} />
                     ) : (
                         <div className="icon" />
                     )}

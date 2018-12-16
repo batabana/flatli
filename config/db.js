@@ -38,7 +38,23 @@ exports.saveDate = async (title, start, end) => {
 };
 
 exports.deleteDate = async id => {
-    const query = `DELETE FROM dates WHERE id = $1`;
+    const query = `DELETE FROM dates WHERE id = $1 RETURNING *`;
     const { rows } = await db.query(query, [id]);
+    return rows;
+};
+
+exports.getAllDrinks = async user => {
+    const query = `
+        SELECT *, (
+            SELECT COUNT(drink_id) FROM debts WHERE user_id = $1 AND debts.drink_id = drinks.id
+        ) AS count, count * price AS total
+        FROM drinks;`;
+    const { rows } = await db.query(query, [user]);
+    return rows;
+};
+
+exports.saveDrink = async (user, drink) => {
+    const query = `INSERT INTO debts (user_id, drink_id) VALUES ($1, $2) RETURNING *`;
+    const { rows } = await db.query(query, [user, drink]);
     return rows;
 };
