@@ -6,16 +6,18 @@ export default class Calendar extends React.Component {
         super(props);
         this.state = {};
         this.addDrink = this.addDrink.bind(this);
+        this.clearCheck = this.clearCheck.bind(this);
+        this.savePlus = this.savePlus.bind(this);
     }
 
     async componentDidMount() {
         const { data } = await axios.get("/api/all-drinks");
         if (data.success) {
-            let total = 0;
+            let check = 0;
             for (var i = 0; i < data.drinks.length; i++) {
-                total += Number(data.drinks[i].count) * Number(data.drinks[i].price);
+                check += Number(data.drinks[i].count) * Number(data.drinks[i].price);
             }
-            this.setState({ drinks: data.drinks, total });
+            this.setState({ drinks: data.drinks, check, credit: Number(this.props.credit) });
         }
     }
 
@@ -31,7 +33,35 @@ export default class Calendar extends React.Component {
                     }
                     return item;
                 }),
-                total: Number(this.state.total) + Number(price)
+                check: Number(this.state.check) + Number(price)
+            });
+    }
+
+    async clearCheck() {
+        const newCredit = this.state.credit - this.state.check;
+        const { data } = await axios.post("/api/clear-check", { newCredit });
+        data.success &&
+            this.setState({
+                credit: newCredit,
+                check: 0,
+                drinks: this.state.drinks.map(item => {
+                    item.count = 0;
+                    return item;
+                })
+            });
+    }
+
+    async savePlus() {
+        const plus = Number(this.state.plus);
+        if (isNaN(plus)) {
+            return;
+        }
+        const newCredit = this.state.credit + plus;
+        const { data } = await axios.post("/api/update-credit", { newCredit });
+        data.success &&
+            this.setState({
+                credit: newCredit,
+                showCashAdder: false
             });
     }
 
@@ -41,17 +71,12 @@ export default class Calendar extends React.Component {
         }
         let arrOfDrinks = this.state.drinks.map(elem => {
             return (
-                <div
-                    key={elem.id}
-                    id={elem.id}
-                    price={elem.price}
-                    style={{ backgroundImage: `url(${elem.image})` }}
-                    className="drink-icon"
-                    onClick={this.addDrink}
-                >
-                    <p>{elem.name}</p>
-                    <p>Σ {elem.count}</p>
-                    <p>{elem.price} €</p>
+                <div key={elem.id} style={{ backgroundImage: `url(${elem.image})` }} className="drink-icon">
+                    <div id={elem.id} price={elem.price} onClick={this.addDrink}>
+                        <p>{elem.name}</p>
+                        <p>Σ {elem.count}</p>
+                        <p>{elem.price} €</p>
+                    </div>
                 </div>
             );
         });
@@ -59,9 +84,29 @@ export default class Calendar extends React.Component {
             <div className="bar-container">
                 <h4>bar</h4>
                 <span>
-                    account balance: {this.props.credit} € | current bill: {this.state.total.toFixed(2)} €
+                    credit: {this.state.credit.toFixed(2)} € | current check: {this.state.check.toFixed(2)} €
                 </span>
                 <div className="drinks-container">{arrOfDrinks}</div>
+                <div className="drink-buttons">
+                    <button onClick={this.clearCheck}>clear check</button>
+                    <button onClick={() => this.setState({ showCashAdder: true })}>pay in</button>
+                    {this.state.showCashAdder && (
+                        <div className="drink-buttons">
+                            <input
+                                onChange={e => this.setState({ plus: e.target.value })}
+                                name="plus"
+                                placeholder="10.00"
+                                type="text"
+                            />
+                            <img src="icons/check.png" className="icon" onClick={this.savePlus} />
+                            <img
+                                src="icons/cross.png"
+                                className="icon"
+                                onClick={() => this.setState({ showCashAdder: false })}
+                            />
+                        </div>
+                    )}
+                </div>
             </div>
         );
     }

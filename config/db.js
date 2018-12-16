@@ -47,7 +47,7 @@ exports.getAllDrinks = async user => {
     const query = `
         SELECT *, (
             SELECT COUNT(drink_id) FROM debts WHERE user_id = $1 AND debts.drink_id = drinks.id
-        ) AS count, count * price AS total
+        ) AS count
         FROM drinks;`;
     const { rows } = await db.query(query, [user]);
     return rows;
@@ -56,5 +56,17 @@ exports.getAllDrinks = async user => {
 exports.saveDrink = async (user, drink) => {
     const query = `INSERT INTO debts (user_id, drink_id) VALUES ($1, $2) RETURNING *`;
     const { rows } = await db.query(query, [user, drink]);
+    return rows;
+};
+
+exports.clearDebts = async user => {
+    const query = `DELETE FROM debts WHERE user_id = $1 RETURNING *`;
+    const { rows } = await db.query(query, [user]);
+    return rows;
+};
+
+exports.updateCredit = async (user, newCredit) => {
+    const query = `UPDATE users SET credit = $2 WHERE id = $1 RETURNING *`;
+    const { rows } = await db.query(query, [user, newCredit]);
     return rows;
 };

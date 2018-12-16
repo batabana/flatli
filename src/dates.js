@@ -133,7 +133,7 @@ export default class Dates extends React.Component {
                         <input onChange={this.handleChange} name="start" type="date" />
                         <input onChange={this.handleChange} name="end" type="date" />
                         <input onChange={this.handleChange} name="title" type="text" placeholder="title" />
-                        <button>Save</button>
+                        <button>save</button>
                     </form>
                 )}
             </div>

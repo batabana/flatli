@@ -161,6 +161,34 @@ app.get("/api/add-drink/:id", async (req, res) => {
     }
 });
 
+app.post("/api/clear-check", async (req, res) => {
+    const user = req.session.userId;
+    const newCredit = req.body.newCredit;
+    try {
+        await db.clearDebts(user);
+        await db.updateCredit(user, newCredit);
+        res.json({ success: true });
+    } catch (err) {
+        console.log("error in get /api/clear-check", err);
+        res.json({ success: false });
+    }
+});
+
+app.post("/api/update-credit", async (req, res) => {
+    const user = req.session.userId;
+    const newCredit = req.body.newCredit;
+    if (isNaN(newCredit)) {
+        res.json({ success: false });
+    } else {
+        try {
+            await db.updateCredit(user, newCredit);
+            res.json({ success: true });
+        } catch (err) {
+            console.log("error in get /api/update-credit", err);
+        }
+    }
+});
+
 app.get("/logout", (req, res) => {
     req.session = null;
     res.redirect("/");
