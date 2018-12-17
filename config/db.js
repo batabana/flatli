@@ -2,7 +2,7 @@ var spicedPg = require("spiced-pg");
 var db = spicedPg(process.env.DATABASE_URL || "postgres:postgres:postgres@localhost:5432/flatli");
 
 exports.getUsers = async () => {
-    const query = `SELECT * FROM users`;
+    const query = `SELECT * FROM users ORDER BY id`;
     const { rows } = await db.query(query);
     return rows;
 };
@@ -68,5 +68,26 @@ exports.clearDebts = async user => {
 exports.updateCredit = async (user, newCredit) => {
     const query = `UPDATE users SET credit = $2 WHERE id = $1 RETURNING *`;
     const { rows } = await db.query(query, [user, newCredit]);
+    return rows;
+};
+
+exports.saveExpense = async (day, amount) => {
+    const query = `INSERT INTO expenses (day, amount) VALUES ($1, $2) RETURNING *`;
+    const { rows } = await db.query(query, [day, amount]);
+    return rows;
+};
+
+exports.getAllExpenses = async () => {
+    const query = `SELECT * AS sum_month FROM expenses ORDER BY day DESC`;
+    const { rows } = await db.query(query);
+    return rows;
+};
+
+exports.getSumExpenses = async () => {
+    const query = `
+        SELECT SUM(amount) FROM expenses
+        WHERE TO_CHAR(day, 'MM') = TO_CHAR(NOW(), 'MM')
+        AND TO_CHAR(day, 'YYYY') = TO_CHAR(NOW(), 'YYYY')`;
+    const { rows } = await db.query(query);
     return rows;
 };

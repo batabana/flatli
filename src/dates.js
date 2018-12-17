@@ -4,7 +4,7 @@ import axios from "./axios";
 export default class Dates extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { showDateAdder: false, batch: 1 };
+        this.state = { batch: 1 };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.deleteDate = this.deleteDate.bind(this);
@@ -129,7 +129,7 @@ export default class Dates extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         <input onChange={this.handleChange} name="start" type="date" />
                         <input onChange={this.handleChange} name="end" type="date" />
-                        <input onChange={this.handleChange} name="title" type="text" placeholder="title" />
+                        <input onChange={this.handleChange} name="title" type="text" placeholder="event" />
                         <button>save</button>
                     </form>
                 )}

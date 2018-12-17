@@ -36,8 +36,8 @@ export default class Calendar extends React.Component {
 
     render() {
         return (
-            <div className="dayz-modal" onClick={this.props.hideCalendar}>
-                <div className="dayz-wrapper" onClick={this.notHideCalendar}>
+            <div className="modal" onClick={this.props.hideCalendar}>
+                <div className="dayz-wrapper modal-inside" onClick={this.notHideCalendar}>
                     <header>
                         <div />
                         <h3>{moment(this.state.date).format("MMMM YYYY")}</h3>

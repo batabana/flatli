@@ -189,6 +189,42 @@ app.post("/api/update-credit", async (req, res) => {
     }
 });
 
+app.get("/api/all-expenses", async (req, res) => {
+    try {
+        const expenses = await db.getAllExpenses();
+        expenses.map(item => {
+            item.day = moment(item.day).format("DD.MM.YY");
+            return item;
+        });
+        res.json({ success: true, expenses });
+    } catch (err) {
+        console.log("error in get /api/all-expenses", err);
+        res.json({ success: false });
+    }
+});
+
+app.post("/api/add-expense", async (req, res) => {
+    try {
+        const { day, amount } = req.body;
+        const result = await db.saveExpense(day, amount);
+        result[0].day = moment(result[0].day).format("DD.MM.YY");
+        res.json({ success: true, result });
+    } catch (err) {
+        console.log("error in get /api/add-expense", err);
+        res.json({ success: false });
+    }
+});
+
+app.get("/api/sum-expenses", async (req, res) => {
+    try {
+        const expenses = await db.getSumExpenses();
+        res.json({ success: true, expenses });
+    } catch (err) {
+        console.log("error in get /api/sum-expenses", err);
+        res.json({ success: false });
+    }
+});
+
 app.get("/logout", (req, res) => {
     req.session = null;
     res.redirect("/");
