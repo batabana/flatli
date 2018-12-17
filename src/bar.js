@@ -22,7 +22,7 @@ export default class Calendar extends React.Component {
     }
 
     async addDrink(e) {
-        const drinkId = e.target.id;
+        const drinkId = e.target.id || e.target.parentElement.id;
         const price = e.target.getAttribute("price");
         const { data } = await axios.get("/api/add-drink/" + drinkId);
         data.success &&

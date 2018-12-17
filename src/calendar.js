@@ -2,7 +2,6 @@ import React from "react";
 import moment from "./moment-range";
 import Dayz from "dayz";
 import axios from "./axios";
-import { Link } from "react-router-dom";
 
 export default class Calendar extends React.Component {
     constructor(props) {
@@ -31,31 +30,36 @@ export default class Calendar extends React.Component {
         this.setState({ display: ev.target.value });
     }
 
+    notHideCalendar(e) {
+        e.stopPropagation();
+    }
+
     render() {
         return (
-            <div className="dayz-wrapper">
-                <h3>{moment(this.state.date).format("MMMM YYYY")}</h3>
-                <div>
-                    <img
-                        src="icons/left.png"
-                        className="icon"
-                        onClick={() => {
-                            this.setState({ date: moment(this.state.date).add(-1, "M") });
-                        }}
-                    />
-                    <Dayz {...this.state} highlightDays={[this.state.date]} />
-                    <img
-                        src="icons/right.png"
-                        className="icon"
-                        onClick={() => {
-                            this.setState({ date: moment(this.state.date).add(1, "M") });
-                        }}
-                    />
-                </div>
-                <div>
-                    <Link to="/" className="fake-button">
-                        Go back
-                    </Link>
+            <div className="dayz-modal" onClick={this.props.hideCalendar}>
+                <div className="dayz-wrapper" onClick={this.notHideCalendar}>
+                    <header>
+                        <div />
+                        <h3>{moment(this.state.date).format("MMMM YYYY")}</h3>
+                        <img src="icons/cross.png" className="icon" onClick={this.props.hideCalendar} />
+                    </header>
+                    <div>
+                        <img
+                            src="icons/left.png"
+                            className="icon"
+                            onClick={() => {
+                                this.setState({ date: moment(this.state.date).add(-1, "M") });
+                            }}
+                        />
+                        <Dayz {...this.state} highlightDays={[this.state.date]} />
+                        <img
+                            src="icons/right.png"
+                            className="icon"
+                            onClick={() => {
+                                this.setState({ date: moment(this.state.date).add(1, "M") });
+                            }}
+                        />
+                    </div>
                 </div>
             </div>
         );

@@ -5,7 +5,6 @@
 
 input,
 button,
-.fake-button,
 textarea {
     padding: 5px;
     margin: 2px;
@@ -15,14 +14,12 @@ textarea {
     width: 85px;
 }
 
-button,
-.fake-button {
+button {
     background: #509aaf;
     cursor: pointer;
 }
 
-button:hover,
-.fake-button:hover {
+button:hover {
     background: #7dd8c7;
 }
 
@@ -137,16 +134,17 @@ a {
     cursor: pointer;
 }
 
-.dvb-container header {
+.dvb-container header,
+.dayz-wrapper header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5px;
 }
 
-/* app/main */
+/* app */
 
-.main-container {
+.app-container {
     display: flex;
     flex-wrap: wrap;
     /* min-width: 100vw; */
@@ -159,7 +157,6 @@ header .icon {
 }
 
 .date-container,
-.dayz-wrapper,
 .bar-container {
     margin: 1em;
     padding: 1em;
@@ -168,6 +165,19 @@ header .icon {
 }
 
 /* dates/calendar */
+
+.dayz-modal {
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .date-container header {
     margin-bottom: 10px;
@@ -183,7 +193,7 @@ header .icon {
 }
 
 .dates {
-    width: 400px;
+    min-width: 400px;
     display: grid;
     grid-template-columns: 20% 66% 14%;
     align-items: center;
@@ -206,7 +216,11 @@ header .icon {
 }
 
 .dayz-wrapper {
-    width: 75%;
+    background-color: white;
+    border-radius: 5px;
+    z-index: 20;
+    padding: 2em;
+    max-width: 75%;
 }
 
 .dayz-wrapper > div {
@@ -219,8 +233,7 @@ header .icon {
     margin: 10px;
 }
 
-.dayz-wrapper h3,
-.dayz-wrapper .fake-button {
+.dayz-wrapper h3 {
     text-align: center;
     margin: 10px;
 }

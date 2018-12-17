@@ -1,10 +1,9 @@
 import React from "react";
 import axios from "./axios";
-import { Link } from "react-router-dom";
 
 export default class Dates extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = { showDateAdder: false, batch: 1 };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -62,9 +61,7 @@ export default class Dates extends React.Component {
             <div className="date-container">
                 <header>
                     <h4>guests | away</h4>
-                    <Link to="/calendar">
-                        <img src="icons/calendar.png" className="icon" />
-                    </Link>
+                    <img src="icons/calendar.png" className="icon" onClick={this.props.showCalendar} />
                 </header>
                 {this.state.dates.map(item => {
                     return (
