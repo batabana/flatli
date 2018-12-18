@@ -83,9 +83,10 @@ app.get("/api/weather", async (req, res) => {
         const forecast = [];
         for (let i = 0; i < forecastData.data.list.length; i++) {
             forecast.push({
-                date: moment.unix(forecastData.data.list[i].dt).format("D.M.YY H:mm"),
-                temp_min: forecastData.data.list[i].main.temp_min,
-                temp_max: forecastData.data.list[i].main.temp_max,
+                date: moment.unix(forecastData.data.list[i].dt).format("DD.MM."),
+                time: moment.unix(forecastData.data.list[i].dt).format("HH:mm"),
+                temp_min: forecastData.data.list[i].main.temp_min.toFixed(0),
+                temp_max: forecastData.data.list[i].main.temp_max.toFixed(0),
                 icon: forecastData.data.list[i].weather[0].icon,
                 description: forecastData.data.list[i].weather[0].description
             });

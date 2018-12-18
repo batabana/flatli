@@ -28,32 +28,36 @@ export default class Weather extends React.Component {
         }
         const weatherIcon = "http://openweathermap.org/img/w/";
         return (
-            <div>
+            <div className="weather-container">
                 <header>
                     <img
                         src={weatherIcon + current.icon + ".png"}
                         alt={current.description}
                         title={current.description}
                     />
-                    <span>Dresden {current.temp} °C</span>
-                    <img src="/icons/reload.png" onClick={this.refreshData} />
+                    <span>Dresden {current.temp}°C</span>
+                    <img src="/icons/reload.png" onClick={this.refreshData} className="icon" />
                 </header>
-                {/* <div className="lines-header">
-                    <span>line</span>
-                    <span>direction</span>
-                    <span>min</span>
-                </div>
-                <div className="lines-container">
-                    {this.state.departures.map(item => {
+                <div className="forecast">
+                    {this.state.forecast.map((item, idx) => {
                         return (
-                            <div key={item.id} className="lines">
-                                <span>{item.line}</span>
-                                <span>{item.direction}</span>
-                                <span>{item.arrivalTimeRelative}</span>
+                            <div key={idx}>
+                                <div>
+                                    <span>{item.date}</span>
+                                    <br />
+                                    <span>{item.time}</span>
+                                </div>
+                                <img
+                                    src={weatherIcon + item.icon + ".png"}
+                                    alt={item.description}
+                                    title={item.description}
+                                />
+                                <span className="min">{item.temp_min}°C</span>
+                                <span className="max">{item.temp_max}°C</span>
                             </div>
                         );
                     })}
-                </div> */}
+                </div>
             </div>
         );
     }

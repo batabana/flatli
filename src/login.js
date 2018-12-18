@@ -44,7 +44,9 @@ export default class Login extends React.Component {
                     <div>
                         <Weather />
                         <DvbMonitor />
-                        <img src="wifi-code.png" alt="QR-Code for WiFi" className="qr-code" />
+                        <div>
+                            <img src="wifi-code.png" alt="QR-Code for WiFi" className="qr-code" />
+                        </div>
                     </div>
                     <div>{arrOfUsers}</div>
                 </div>
