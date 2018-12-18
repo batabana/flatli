@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "./axios";
 import DvbMonitor from "./dvb";
+import Weather from "./weather";
 
 export default class Login extends React.Component {
     constructor() {
@@ -41,6 +42,7 @@ export default class Login extends React.Component {
                 </div>
                 <div className="rightHalf">
                     <div>
+                        <Weather />
                         <DvbMonitor />
                         <img src="wifi-code.png" alt="QR-Code for WiFi" className="qr-code" />
                     </div>

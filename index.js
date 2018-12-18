@@ -6,6 +6,7 @@ const db = require("./config/db.js");
 const csurf = require("csurf");
 const dvb = require("dvbjs");
 const moment = require("moment");
+var axios = require("axios");
 
 // setup bodyparser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -49,7 +50,7 @@ if (process.env.NODE_ENV != "production") {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
-// routes
+// call to dvb api
 app.get("/api/public", async (req, res) => {
     const stopID = "33000115"; // Wasaplatz
     var timeOffset = 0;
@@ -64,6 +65,39 @@ app.get("/api/public", async (req, res) => {
     }
 });
 
+// call to weather api
+app.get("/api/weather", async (req, res) => {
+    const key = secrets.weatherAPI;
+    const cityId = "2935022"; // Dresden
+    const cnt = 8;
+    const currentUrl = `http://api.openweathermap.org/data/2.5/weather?id=${cityId}&APPID=${key}&units=metric`;
+    const forecastUrl = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&APPID=${key}&units=metric&cnt=${cnt}`;
+    try {
+        const currentData = await axios.get(currentUrl);
+        const forecastData = await axios.get(forecastUrl);
+        const current = {
+            icon: currentData.data.weather[0].icon,
+            description: currentData.data.weather[0].description,
+            temp: currentData.data.main.temp
+        };
+        const forecast = [];
+        for (let i = 0; i < forecastData.data.list.length; i++) {
+            forecast.push({
+                date: moment.unix(forecastData.data.list[i].dt).format("D.M.YY H:mm"),
+                temp_min: forecastData.data.list[i].main.temp_min,
+                temp_max: forecastData.data.list[i].main.temp_max,
+                icon: forecastData.data.list[i].weather[0].icon,
+                description: forecastData.data.list[i].weather[0].description
+            });
+        }
+        res.json({ success: true, current, forecast });
+    } catch (err) {
+        console.log("error in get /api/weather", err);
+        res.json({ success: false });
+    }
+});
+
+// db routes
 app.get("/api/users", async (req, res) => {
     try {
         const users = await db.getUsers();
