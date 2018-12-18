@@ -215,9 +215,13 @@ app.post("/api/add-expense", async (req, res) => {
     }
 });
 
-app.get("/api/sum-expenses", async (req, res) => {
+app.get("/api/sum-expenses/", async (req, res) => {
+    const lastDate = moment(moment().utc())
+        .add(-5, "M")
+        .startOf("month")
+        .toDate();
     try {
-        const expenses = await db.getSumExpenses();
+        const expenses = await db.getSumExpenses(lastDate);
         res.json({ success: true, expenses });
     } catch (err) {
         console.log("error in get /api/sum-expenses", err);

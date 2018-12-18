@@ -29,15 +29,17 @@ export default class Shop extends React.Component {
 
     async componentDidMount() {
         const { data } = await axios.get("/api/sum-expenses");
-        console.log("data", data);
         data.success &&
             this.setState({
-                monthsum: data.expenses[0].sum,
-                monthdiff: 300 - data.expenses[0].sum
+                monthsum: data.expenses[0].monthsum,
+                monthdiff: (300 - data.expenses[0].monthsum).toFixed(2),
+                cyclesum: data.expenses[0].cyclesum,
+                cyclediff: (1800 - data.expenses[0].cyclesum).toFixed(2)
             });
     }
 
     render() {
+        const { monthsum, monthdiff, cyclesum, cyclediff } = this.state;
         return (
             <div className="shop-container">
                 <header>
@@ -45,9 +47,11 @@ export default class Shop extends React.Component {
                     <img src="icons/book.png" className="icon" onClick={this.props.showExpenses} />
                 </header>
                 <p>
-                    Σ month: {this.state.monthsum} € | Δ month: {this.state.monthdiff} €
+                    Σ month: {monthsum} € | Δ month: {monthdiff} €
                 </p>
-                <p>Σ cycle: | Δ cycle: </p>
+                <p>
+                    Σ cycle: {cyclesum} € | Δ cycle: {cyclediff} €
+                </p>
                 <img
                     src={this.state.showAdder ? "icons/cross.png" : "icons/plus.png"}
                     className="icon"

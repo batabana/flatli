@@ -78,16 +78,32 @@ exports.saveExpense = async (day, amount) => {
 };
 
 exports.getAllExpenses = async () => {
-    const query = `SELECT * AS sum_month FROM expenses ORDER BY day DESC`;
+    const query = `
+        SELECT id, day, amount, monthsum
+        FROM expenses
+        JOIN
+        (SELECT TO_CHAR(day, 'YYYY') AS year,
+               TO_CHAR(day,'MM') AS month,
+               SUM(amount) AS monthsum
+        FROM expenses
+        GROUP BY 1,2) as aggregate
+        ON TO_CHAR(expenses.day, 'MM') = aggregate.month
+        AND TO_CHAR(expenses.day, 'YYYY') = aggregate.year
+        ORDER BY expenses.day DESC;`;
     const { rows } = await db.query(query);
     return rows;
 };
 
-exports.getSumExpenses = async () => {
+exports.getSumExpenses = async lastDate => {
     const query = `
-        SELECT SUM(amount) FROM expenses
-        WHERE TO_CHAR(day, 'MM') = TO_CHAR(NOW(), 'MM')
-        AND TO_CHAR(day, 'YYYY') = TO_CHAR(NOW(), 'YYYY')`;
-    const { rows } = await db.query(query);
+        SELECT (
+            SELECT SUM(amount) AS sum FROM expenses
+            WHERE day BETWEEN $1 AND NOW()
+        ) AS cyclesum, (
+            SELECT SUM(amount) AS sum FROM expenses
+            WHERE TO_CHAR(day, 'MM') = TO_CHAR(NOW(), 'MM')
+            AND TO_CHAR(day, 'YYYY') = TO_CHAR(NOW(), 'YYYY')
+        ) AS monthsum`;
+    const { rows } = await db.query(query, [lastDate]);
     return rows;
 };
