@@ -36,7 +36,7 @@ export default class Weather extends React.Component {
                         title={current.description}
                     />
                     <span>Dresden {current.temp}°C</span>
-                    <img src="/icons/reload.png" onClick={this.refreshData} className="icon" />
+                    <img src="/icons/reload_white.png" onClick={this.refreshData} className="icon" />
                 </header>
                 <div className="forecast">
                     {this.state.forecast.map((item, idx) => {

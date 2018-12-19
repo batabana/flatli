@@ -1,6 +1,14 @@
-* {
-    font-family: "Muli", sans-serif;
+/*
+- blue: rgb(0,132,176)
+- green: rgb(0,163,86)
+- dark grey: #1a181b
+- grey: rgb(77,77,76)
+ */
+
+body {
+    font-family: "Montserrat", sans-serif;
     margin: 0;
+    /* font-size: 15px; */
 }
 
 input,
@@ -10,17 +18,17 @@ textarea {
     margin: 2px;
     border-radius: 5px;
     font-size: 11px;
-    border: 1px solid #509aaf;
+    border: 1px solid rgb(0, 132, 176);
     width: 85px;
 }
 
 button {
-    background: #509aaf;
+    background: rgb(0, 132, 176);
     cursor: pointer;
 }
 
 button:hover {
-    background: #7dd8c7;
+    background: rgb(0, 163, 86);
 }
 
 a {
@@ -29,7 +37,7 @@ a {
 }
 
 .icon {
-    width: 20px;
+    height: 20px;
     cursor: pointer;
 }
 
@@ -57,11 +65,20 @@ a {
     max-height: 90%;
 }
 
+.dvb-container header,
+.modal-inside header,
+.weather-container header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
 /* login */
 
-.leftHalf {
+.left-half {
     background: #1a181b;
-    width: 30%;
+    width: 40%;
     position: absolute;
     left: 0px;
     height: 100%;
@@ -70,9 +87,9 @@ a {
     align-items: center;
 }
 
-.rightHalf {
+.right-half {
     background: white;
-    width: 70%;
+    width: 60%;
     position: absolute;
     right: 0px;
     height: 100%;
@@ -81,19 +98,18 @@ a {
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
-    /* background-image: linear-gradient(to right, #0082b3, #02a357); */
 }
 
-#acat {
+.left-half #acat {
     height: 65%;
 }
 
-.rightHalf > div {
+.right-half > div {
     display: flex;
     flex-wrap: wrap;
 }
 
-.rightHalf > div > div {
+.right-half > div > div {
     margin: 10px;
 }
 
@@ -105,14 +121,10 @@ a {
 .user-icon {
     width: 75px;
     height: 75px;
-    background-color: #ededed;
-    color: #1a181b;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin: 5px;
     cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* dvb */
@@ -124,17 +136,23 @@ a {
     padding: 0 5px 10px 5px;
 }
 
-.lines-header,
-.lines-container {
+.dvb-container main {
+    padding: 3px;
     background: #000000;
     color: #a6650c;
     font-size: 13px;
 }
 
+.dvb-container header {
+    padding-top: 7px;
+    padding-bottom: 10px;
+}
+
 .lines,
 .lines-header {
     display: grid;
-    grid-template-columns: 18% 67% 15%;
+    grid-template-columns: 20% 65% 15%;
+    line-height: 135%;
 }
 
 .lines-header {
@@ -153,13 +171,13 @@ a {
 }
 
 .dvb-container img {
-    width: 20px;
     vertical-align: middle;
-    padding: 2px;
 }
 
-.dvb-container img:nth-child(3) {
-    cursor: pointer;
+.dvb-container img:nth-child(1) {
+    width: 30px;
+    vertical-align: middle;
+    padding: 2px;
 }
 
 /* weather */
@@ -169,10 +187,11 @@ a {
     background-color: rgb(0, 132, 176);
     border-radius: 5px;
     padding: 5px;
+    color: white;
 }
 
 .forecast {
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .forecast > div {
@@ -186,6 +205,11 @@ a {
     height: 35px;
 }
 
+.forecast .min,
+.forecast .max {
+    font-size: 14px;
+}
+
 .forecast .min {
     color: #88b8d2;
 }
@@ -194,30 +218,72 @@ a {
     color: #dcaeab;
 }
 
+/* clock */
+.clock {
+    font-family: "Share Tech Mono", monospace;
+    background: #0f3854;
+    background: radial-gradient(ellipse at center, #0a2e38 0%, #000000 70%);
+    background-size: 100%;
+    color: #daf6ff;
+    text-shadow: 0 0 20px rgba(10, 175, 230, 1), 0 0 20px rgba(10, 175, 230, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.clock span:nth-child(2) {
+    letter-spacing: 0.05em;
+    font-weight: bold;
+}
+
+.clock span:nth-child(1) {
+    letter-spacing: 0.1em;
+    font-size: 12px;
+}
+
 /* app */
 
 .app-container {
-    display: flex;
-    flex-wrap: wrap;
     background-image: linear-gradient(to right, rgb(0, 132, 176), rgb(0, 163, 86));
     min-height: 100vh;
-    /* min-width: 100vw; */
-    /* justify-content: space-around; */
 }
 
-header .user-icon,
-header .icon {
-    float: right;
+.app-container > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1a181b;
+    height: 100px;
+}
+
+.app-container > header > img:nth-child(1),
+.app-container > header > a > img:nth-child(1) {
+    height: 90px;
+    margin: 10px;
+}
+
+.app-container > header > img:nth-child(2) {
+    height: 40px;
+}
+
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    /* background-image: linear-gradient(to right, rgb(0, 132, 176), rgb(0, 163, 86)); */
+    /* min-height: 100vh; */
+    /* min-width: 100vw; */
+    justify-content: center;
 }
 
 .date-container,
 .bar-container,
-.shop-container,
-.current-container {
+.shop-container {
     margin: 1em;
     padding: 1em;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 50%;
     background: white;
 }
 
@@ -227,19 +293,9 @@ header .icon {
     align-items: center;
 }
 
-.dvb-container header,
-.modal-inside header,
-.weather-container header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px;
-    font-weight: bold;
-}
-
 .date-container header,
 .shop-container header {
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     margin-right: 20px;
     display: flex;
     justify-content: space-between;
@@ -264,6 +320,7 @@ header .icon {
 .dates p {
     font-size: 12px;
     color: #696969;
+    margin: 2px;
 }
 
 .dates .delete-icons {
@@ -287,6 +344,10 @@ header .icon {
 }
 
 /* bar/drinks */
+
+.bar-container {
+    max-width: 50%;
+}
 
 .drinks-container {
     display: flex;
@@ -320,12 +381,6 @@ header .icon {
 
 .drink-buttons .icon {
     margin: 2px;
-}
-
-/* current */
-
-.current-container {
-    text-align: center;
 }
 
 /* shop */

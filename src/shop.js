@@ -43,7 +43,7 @@ export default class Shop extends React.Component {
         return (
             <div className="shop-container">
                 <header>
-                    <h4>vg | shop</h4>
+                    <h4>food coop</h4>
                     <img src="icons/book.png" className="icon" onClick={this.props.showExpenses} />
                 </header>
                 <p>

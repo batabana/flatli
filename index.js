@@ -6,7 +6,7 @@ const db = require("./config/db.js");
 const csurf = require("csurf");
 const dvb = require("dvbjs");
 const moment = require("moment");
-var axios = require("axios");
+const axios = require("axios");
 
 // setup bodyparser
 app.use(bodyParser.urlencoded({ extended: false }));

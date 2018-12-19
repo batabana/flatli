@@ -3,7 +3,6 @@ import axios from "./axios";
 import Dates from "./dates";
 import Bar from "./bar";
 import Calendar from "./calendar";
-import Current from "./current";
 import Shop from "./shop";
 import Expenses from "./expenses";
 
@@ -20,6 +19,7 @@ export default class App extends React.Component {
     async componentDidMount() {
         const { data } = await axios.get("/api/currentuser");
         await this.setState({ user: data });
+        console.log("state", this.state.user);
     }
 
     showCalendar() {
@@ -42,13 +42,22 @@ export default class App extends React.Component {
         if (!this.state.user) {
             return null;
         }
+        const user = this.state.user[0];
         return (
-            <div>
-                <div className="app-container">
-                    <Dates showCalendar={this.showCalendar} />
+            <div className="app-container">
+                <header>
+                    <img src="acat.png" />
+                    <img src="flatli.png" />
+                    <a href="/logout">
+                        <img src={user.image} alt={user.name} title={user.name} />
+                    </a>
+                </header>
+                <div className="dashboard">
                     <Bar credit={this.state.user[0].credit} />
-                    <Shop showExpenses={this.showExpenses} />
-                    <Current user={this.state.user[0].id} />
+                    <div>
+                        <Dates showCalendar={this.showCalendar} />
+                        <Shop showExpenses={this.showExpenses} />
+                    </div>
                     {this.state.calendarVisible && <Calendar date={Date.now()} hideCalendar={this.hideCalendar} />}
                     {this.state.expensesVisible && <Expenses date={Date.now()} hideExpenses={this.hideExpenses} />}
                 </div>

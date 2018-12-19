@@ -29,24 +29,26 @@ export default class DvbMonitor extends React.Component {
                 <header>
                     <img src="/icons/stop.png" />
                     <span className="dvb-headline">Wasaplatz</span>
-                    <img src="/icons/reload.png" onClick={this.refreshData} />
+                    <img src="/icons/reload.png" onClick={this.refreshData} className="icon" />
                 </header>
-                <div className="lines-header">
-                    <span>line</span>
-                    <span>direction</span>
-                    <span>min</span>
-                </div>
-                <div className="lines-container">
-                    {this.state.departures.map(item => {
-                        return (
-                            <div key={item.id} className="lines">
-                                <span>{item.line}</span>
-                                <span>{item.direction}</span>
-                                <span>{item.arrivalTimeRelative}</span>
-                            </div>
-                        );
-                    })}
-                </div>
+                <main>
+                    <div className="lines-header">
+                        <span>line</span>
+                        <span>direction</span>
+                        <span>min</span>
+                    </div>
+                    <div className="lines-container">
+                        {this.state.departures.map(item => {
+                            return (
+                                <div key={item.id} className="lines">
+                                    <span>{item.line}</span>
+                                    <span>{item.direction}</span>
+                                    <span>{item.arrivalTimeRelative}</span>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </main>
             </div>
         );
     }
