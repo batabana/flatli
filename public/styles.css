@@ -19,7 +19,7 @@ textarea {
     border-radius: 5px;
     font-size: 11px;
     border: 1px solid rgb(0, 132, 176);
-    width: 85px;
+    width: 100px;
 }
 
 button {
@@ -272,9 +272,6 @@ a {
 .dashboard {
     display: flex;
     flex-wrap: wrap;
-    /* background-image: linear-gradient(to right, rgb(0, 132, 176), rgb(0, 163, 86)); */
-    /* min-height: 100vh; */
-    /* min-width: 100vw; */
     justify-content: center;
 }
 
@@ -295,10 +292,10 @@ a {
 
 .date-container header,
 .shop-container header {
-    /* margin-bottom: 10px; */
     margin-right: 20px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 /* dates/calendar */
@@ -310,7 +307,7 @@ a {
 }
 
 .dates {
-    min-width: 400px;
+    min-width: 510px;
     display: grid;
     grid-template-columns: 20% 66% 14%;
     align-items: center;
@@ -346,12 +343,13 @@ a {
 /* bar/drinks */
 
 .bar-container {
-    max-width: 50%;
+    max-width: 40%;
 }
 
 .drinks-container {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 10px;
 }
 
 .drink-icon {
@@ -363,20 +361,30 @@ a {
     background-position: center center;
     text-align: center;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 13px;
 }
 
 .drink-icon > div {
-    height: 100%;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
+    /* height: 100%;
+    width: 100%; */
+    background-color: rgba(255, 255, 255, 0.8);
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
+.drink-icon:hover {
+    /* background-color: rgba(0, 132, 176, 0.1); */
+    box-shadow: 0 4px 8px 0 rgba(0, 132, 176, 0.5);
+}
+
 .drink-buttons {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .drink-buttons .icon {

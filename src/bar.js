@@ -22,8 +22,9 @@ export default class Calendar extends React.Component {
     }
 
     async addDrink(e) {
+        console.log("event", e.target);
         const drinkId = e.target.id || e.target.parentElement.id;
-        const price = e.target.getAttribute("price");
+        const price = e.target.getAttribute("price") || e.target.parentElement.getAttribute("price");
         const { data } = await axios.get("/api/add-drink/" + drinkId);
         data.success &&
             this.setState({
@@ -71,11 +72,18 @@ export default class Calendar extends React.Component {
         }
         let arrOfDrinks = this.state.drinks.map(elem => {
             return (
-                <div key={elem.id} style={{ backgroundImage: `url(${elem.image})` }} className="drink-icon">
-                    <div id={elem.id} price={elem.price} onClick={this.addDrink}>
-                        <p>{elem.name}</p>
-                        <p>Σ {elem.count}</p>
-                        <p>{elem.price} €</p>
+                <div
+                    key={elem.id}
+                    id={elem.id}
+                    style={{ backgroundImage: `url(${elem.image})` }}
+                    className="drink-icon"
+                    onClick={this.addDrink}
+                    price={elem.price}
+                >
+                    <div id={elem.id} price={elem.price}>
+                        <span>{elem.name}</span>
+                        <span>{elem.price} €</span>
+                        <span>Σ {elem.count}</span>
                     </div>
                 </div>
             );

@@ -2,7 +2,7 @@ var spicedPg = require("spiced-pg");
 var db = spicedPg(process.env.DATABASE_URL || "postgres:postgres:postgres@localhost:5432/flatli");
 
 exports.getUsers = async () => {
-    const query = `SELECT * FROM users ORDER BY id`;
+    const query = `SELECT * FROM users ORDER BY name`;
     const { rows } = await db.query(query);
     return rows;
 };
@@ -48,7 +48,8 @@ exports.getAllDrinks = async user => {
         SELECT *, (
             SELECT COUNT(drink_id) FROM debts WHERE user_id = $1 AND debts.drink_id = drinks.id
         ) AS count
-        FROM drinks;`;
+        FROM drinks
+        ORDER BY count DESC, name ASC;`;
     const { rows } = await db.query(query, [user]);
     return rows;
 };
