@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "./axios";
 
-export default class Calendar extends React.Component {
+export default class Bar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -90,11 +90,13 @@ export default class Calendar extends React.Component {
         });
         return (
             <div className="bar-container">
-                <h4>bar</h4>
+                <h3>bar</h3>
+                <hr />
                 <span>
                     credit: {this.state.credit.toFixed(2)} € | current check: {this.state.check.toFixed(2)} €
                 </span>
                 <div className="drinks-container">{arrOfDrinks}</div>
+                <hr />
                 <div className="drink-buttons">
                     <button onClick={this.clearCheck}>clear check</button>
                     <button onClick={() => this.setState({ showCashAdder: true })}>pay in</button>

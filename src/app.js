@@ -49,7 +49,7 @@ export default class App extends React.Component {
                     <img src="acat.png" />
                     <img src="flatli.png" />
                     <a href="/logout">
-                        <img src={user.image} alt={user.name} title={user.name} />
+                        <img src={user.image} alt={user.name} title={user.name} className="user-icon" />
                     </a>
                 </header>
                 <div className="dashboard">

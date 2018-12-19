@@ -60,9 +60,10 @@ export default class Dates extends React.Component {
         return (
             <div className="date-container">
                 <header>
-                    <h4>guests | away</h4>
+                    <h3>guests | away | dates</h3>
                     <img src="icons/calendar.png" className="icon" onClick={this.props.showCalendar} />
                 </header>
+                <hr />
                 {this.state.dates.map(item => {
                     return (
                         <div
@@ -71,7 +72,7 @@ export default class Dates extends React.Component {
                             style={{
                                 backgroundColor:
                                     this.state.showAskSure && item.id == this.state.deleteId
-                                        ? "rgba(255,228,225,0.3)"
+                                        ? "rgba(255,228,225,0.75)"
                                         : "#FFFFFF"
                             }}
                         >
@@ -108,6 +109,7 @@ export default class Dates extends React.Component {
                         </div>
                     );
                 })}
+                <hr />
                 <div className="icons">
                     {this.state.batch > 1 ? (
                         <img src="icons/left.png" className="icon" onClick={this.handleLeftClick} />

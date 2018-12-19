@@ -6,9 +6,7 @@
  */
 
 body {
-    font-family: "Montserrat", sans-serif;
     margin: 0;
-    /* font-size: 15px; */
 }
 
 input,
@@ -34,6 +32,17 @@ button:hover {
 a {
     text-decoration: none;
     color: #000000;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+h3 {
+    margin: 5px;
 }
 
 .icon {
@@ -121,10 +130,16 @@ a {
 .user-icon {
     width: 75px;
     height: 75px;
+    object-fit: contain;
     border-radius: 50%;
     margin: 5px;
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.user-icon:active {
+    box-shadow: 0 2px 8px 0 rgba(0, 132, 176, 0.5);
+    transform: translateY(2px);
 }
 
 /* dvb */
@@ -282,12 +297,14 @@ a {
     padding: 1em;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     background: white;
+    border-radius: 5px;
 }
 
 .date-container form,
 .shop-container form {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .date-container header,
@@ -349,6 +366,7 @@ a {
 .drinks-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     margin-bottom: 10px;
 }
 
@@ -377,8 +395,12 @@ a {
 }
 
 .drink-icon:hover {
-    /* background-color: rgba(0, 132, 176, 0.1); */
     box-shadow: 0 4px 8px 0 rgba(0, 132, 176, 0.5);
+}
+
+.drink-icon:active {
+    box-shadow: 0 2px 8px 0 rgba(0, 132, 176, 0.5);
+    transform: translateY(2px);
 }
 
 .drink-buttons {
@@ -426,4 +448,16 @@ a {
 .expenses.header {
     margin-top: 10px;
     font-weight: bold;
+}
+
+@media only screen and (max-device-width: 1000px) {
+    .bar-container,
+    .modal-inside {
+        max-width: 95%;
+    }
+
+    .dates,
+    .shop-container {
+        min-width: 95%;
+    }
 }

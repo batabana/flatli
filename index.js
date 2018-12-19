@@ -20,8 +20,8 @@ const cookieSession = require("cookie-session");
 app.use(
     cookieSession({
         secret: process.env.COOKIE_SECRET || secrets.cookieSecret,
-        // delete after 2hr
-        maxAge: 1000 * 60 * 60 * 2
+        // delete after 1hr
+        maxAge: 1000 * 60 * 60 * 1
     })
 );
 

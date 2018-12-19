@@ -43,15 +43,17 @@ export default class Shop extends React.Component {
         return (
             <div className="shop-container">
                 <header>
-                    <h4>food coop</h4>
+                    <h3>food coop</h3>
                     <img src="icons/book.png" className="icon" onClick={this.props.showExpenses} />
                 </header>
+                <hr />
                 <p>
                     Σ month: {monthsum} € | Δ month: {monthdiff} €
                 </p>
                 <p>
                     Σ cycle: {cyclesum} € | Δ cycle: {cyclediff} €
                 </p>
+                <hr />
                 <img
                     src={this.state.showAdder ? "icons/cross.png" : "icons/plus.png"}
                     className="icon"
