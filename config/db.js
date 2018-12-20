@@ -15,7 +15,8 @@ exports.getUserById = async id => {
 
 exports.getDateBatch = async (bottom, top) => {
     const query = `
-    SELECT * FROM
+    SELECT *, (SELECT count(id) FROM dates) as count
+    FROM
         (SELECT ROW_NUMBER() OVER (ORDER BY start ASC) AS row, *
         FROM dates
         WHERE "end" >= NOW() - INTERVAL '1 day') AS rows

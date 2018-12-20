@@ -23,7 +23,7 @@ export default class Gif extends React.Component {
         return (
             <div className="modal" onClick={this.props.hideGif}>
                 <div className="gif modal-inside" onClick={this.notHideGif}>
-                    <img src={this.state.gif} />
+                    <img src={this.state.gif} alt="funny cat gif" />
                 </div>
             </div>
         );

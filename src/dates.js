@@ -119,7 +119,7 @@ export default class Dates extends React.Component {
                         className="icon"
                         onClick={() => this.setState({ showDateAdder: !this.state.showDateAdder })}
                     />
-                    {this.state.dates.length >= 5 ? (
+                    {this.state.dates[0].count / 5 > this.state.batch ? (
                         <img src="icons/right.png" className="icon" onClick={this.handleRightClick} />
                     ) : (
                         <div className="icon" />
