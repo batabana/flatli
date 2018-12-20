@@ -85,41 +85,14 @@ h3 {
 
 /* login */
 
-.left-half {
-    background: #1a181b;
-    width: 40%;
-    position: absolute;
-    left: 0px;
-    height: 100%;
+.user-login {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
 }
 
-.right-half {
-    background: white;
-    width: 60%;
-    position: absolute;
-    right: 0px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.left-half #acat {
-    height: 65%;
-}
-
-.right-half > div {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.right-half > div > div {
-    margin: 10px;
+.user-login-container {
+    max-width: 25%;
 }
 
 .qr-code {
@@ -261,12 +234,14 @@ h3 {
 
 /* app */
 
-.app-container {
+.app-container,
+.login-container {
     background-image: linear-gradient(to right, rgb(0, 132, 176), rgb(0, 163, 86));
     min-height: 100vh;
 }
 
-.app-container > header {
+.app-container > header,
+.login-container > header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -275,12 +250,14 @@ h3 {
 }
 
 .app-container > header > img:nth-child(1),
-.app-container > header > a > img:nth-child(1) {
+.app-container > header > a > img:nth-child(1),
+.login-container > header > img:nth-child(1) {
     height: 90px;
     margin: 10px;
 }
 
-.app-container > header > img:nth-child(2) {
+.app-container > header > img:nth-child(2),
+.login-container > header > img:nth-child(2) {
     height: 40px;
 }
 
@@ -290,9 +267,14 @@ h3 {
     justify-content: center;
 }
 
+.login-container .dashboard {
+    align-items: center;
+}
+
 .date-container,
 .bar-container,
-.shop-container {
+.shop-container,
+.login-container .dashboard > div {
     margin: 1em;
     padding: 1em;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

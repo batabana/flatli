@@ -42,19 +42,28 @@ export default class Login extends React.Component {
         });
         return (
             <div className="login-container">
-                <div className="left-half">
-                    <img src="/acat.jpg" id="acat" />
-                </div>
-                <div className="right-half">
+                <header>
+                    <img src="acat.png" />
+                    <img src="flatli.png" />
+                    <div />
+                </header>
+                <div className="dashboard">
+                    <div className="user-login-container">
+                        <h3>choose your user</h3>
+                        <hr />
+                        <div className="user-login">{arrOfUsers}</div>
+                    </div>
                     <div>
                         <Weather />
-                        <DvbMonitor />
-                        <div>
-                            <Clock />
-                            <img src="wifi-code.png" alt="QR-Code for WiFi" className="qr-code" />
-                        </div>
                     </div>
-                    <div>{arrOfUsers}</div>
+                    <div>
+                        <DvbMonitor />
+                    </div>
+                    <div>
+                        <Clock />
+                        <br />
+                        <img src="wifi-code.png" alt="QR-Code for WiFi" className="qr-code" />
+                    </div>
                 </div>
             </div>
         );
