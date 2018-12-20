@@ -3,6 +3,7 @@ import axios from "./axios";
 import DvbMonitor from "./dvb";
 import Weather from "./weather";
 import Clock from "./clock";
+import Header from "./header";
 
 export default class Login extends React.Component {
     constructor() {
@@ -42,11 +43,10 @@ export default class Login extends React.Component {
         });
         return (
             <div className="login-container">
-                <header>
-                    <img src="acat.png" />
-                    <img src="flatli.png" />
-                    <div />
-                </header>
+                <Header />
+                {/* <div className="sider">
+                    <img src="/acat.jpg" id="acat" />
+                </div>  */}
                 <div className="dashboard">
                     <div className="user-login-container">
                         <h3>choose your user</h3>

@@ -98,6 +98,19 @@ app.get("/api/weather", async (req, res) => {
     }
 });
 
+// call to giphy api
+app.get("/api/gif", async (req, res) => {
+    const key = secrets.giphyAPI;
+    const targetUrl = `https://api.giphy.com/v1/gifs/random?api_key=${key}&tag=cat&rating=g`;
+    try {
+        const { data } = await axios.get(targetUrl);
+        res.json({ success: true, gif: data.data.images.original.url });
+    } catch (err) {
+        console.log("error in get /api/gif", err);
+        res.json({ success: false });
+    }
+});
+
 // db routes
 app.get("/api/users", async (req, res) => {
     try {

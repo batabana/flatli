@@ -110,6 +110,29 @@ h3 {
 
 /* app + login */
 
+/* sider on login page
+.sider {
+    background: #1a181b;
+    width: 40%;
+    position: absolute;
+    left: 0px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container .dashboard {
+    width: 60%;
+    position: absolute;
+    right: 0px;
+    height: 100%;
+}
+
+#acat {
+    width: 50%;
+} */
+
 .user-login {
     display: flex;
     flex-wrap: wrap;
@@ -463,14 +486,35 @@ h3 {
     font-weight: bold;
 }
 
-@media only screen and (max-device-width: 1000px) {
-    .bar-container,
-    .modal-inside {
-        max-width: 95%;
+/* gif */
+.gif.modal-inside {
+    min-width: auto;
+    max-width: auto;
+    overflow-y: auto;
+    max-height: auto;
+}
+
+@media only screen and (max-width: 1050px) {
+    .dashboard > div:nth-child(1),
+    .dashboard > div:nth-child(2),
+    .modal-inside,
+    .date-container,
+    .shop-container,
+    .dates {
+        max-width: 90%;
+        min-width: 90%;
+        width: 90%;
     }
 
-    .dates,
-    .shop-container {
-        min-width: 95%;
+    .widgets {
+        flex-wrap: wrap;
+    }
+
+    .gif.modal-inside {
+        min-width: auto;
+        max-width: auto;
+        overflow-y: auto;
+        max-height: auto;
+        width: auto;
     }
 }
