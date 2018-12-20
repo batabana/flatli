@@ -92,9 +92,14 @@ export default class Bar extends React.Component {
             <div className="bar-container">
                 <h3>bar</h3>
                 <hr />
-                <span>
-                    credit: {this.state.credit.toFixed(2)} € | current check: {this.state.check.toFixed(2)} €
-                </span>
+                <div className="ui large label">
+                    credit:
+                    <div className="detail">{this.state.credit.toFixed(2)} € </div>
+                </div>
+                <div className="ui large label">
+                    current check:
+                    <div className="detail">{this.state.check.toFixed(2)} € </div>
+                </div>
                 <div className="drinks-container">{arrOfDrinks}</div>
                 <hr />
                 <div className="drink-buttons">

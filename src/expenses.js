@@ -5,15 +5,27 @@ export default class Expenses extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.deleteExpense = this.deleteExpense.bind(this);
+        this.refreshData = this.refreshData.bind(this);
     }
 
-    async componentDidMount() {
+    async refreshData() {
         const { data } = await axios.get("/api/all-expenses");
         data.success && this.setState({ expenses: data.expenses });
     }
 
+    async componentDidMount() {
+        this.refreshData();
+    }
+
     notHideExpenses(e) {
         e.stopPropagation();
+    }
+
+    async deleteExpense(e) {
+        let deleteId = e.target.id;
+        const { data } = await axios.get("/api/delete-expense/" + deleteId);
+        data.success && this.refreshData();
     }
 
     render() {
@@ -23,10 +35,37 @@ export default class Expenses extends React.Component {
         let prevSum = 0;
         let arrOfExpenses = this.state.expenses.map(elem => {
             let arr = (
-                <div key={elem.id} className="expenses">
+                <div
+                    key={elem.id}
+                    className="expenses"
+                    style={{
+                        backgroundColor:
+                            this.state.showAskSure && elem.id == this.state.deleteId ? "#c18ca2" : "#FFFFFF"
+                    }}
+                >
                     <span>{elem.day}</span>
                     <span>{elem.amount} €</span>
                     <span>{elem.monthsum == prevSum ? "" : elem.monthsum + " €"}</span>
+                    <div className="delete-icons">
+                        {this.state.showAskSure && elem.id == this.state.deleteId ? (
+                            <div>
+                                <img src="icons/check.png" className="icon" id={elem.id} onClick={this.deleteExpense} />{" "}
+                                <img
+                                    src="icons/cross.png"
+                                    className="icon"
+                                    id={elem.id}
+                                    onClick={() => this.setState({ showAskSure: false, deleteId: 0 })}
+                                />
+                            </div>
+                        ) : (
+                            <img
+                                src="icons/trash.png"
+                                className="icon"
+                                id={elem.id}
+                                onClick={() => this.setState({ showAskSure: true, deleteId: elem.id })}
+                            />
+                        )}
+                    </div>
                 </div>
             );
             prevSum = elem.monthsum;

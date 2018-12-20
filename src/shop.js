@@ -7,6 +7,19 @@ export default class Shop extends React.Component {
         this.state = {};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.refreshData = this.refreshData.bind(this);
+    }
+
+    async refreshData() {
+        const { data } = await axios.get("/api/sum-expenses");
+        data.success &&
+            this.setState({
+                monthsum: data.expenses[0].monthsum,
+                monthdiff: (300 - data.expenses[0].monthsum).toFixed(2),
+                cyclesum: data.expenses[0].cyclesum,
+                cyclediff: (1800 - data.expenses[0].cyclesum).toFixed(2),
+                showAdder: false
+            });
     }
 
     handleChange(e) {
@@ -23,19 +36,11 @@ export default class Shop extends React.Component {
         }
         const { data } = await axios.post("/api/add-expense", this.state);
         console.log("data", data);
-        // todo: what happens to the data -> update state, show status
-        data.success && this.setState({ showAdder: false });
+        data.success && this.refreshData();
     }
 
     async componentDidMount() {
-        const { data } = await axios.get("/api/sum-expenses");
-        data.success &&
-            this.setState({
-                monthsum: data.expenses[0].monthsum,
-                monthdiff: (300 - data.expenses[0].monthsum).toFixed(2),
-                cyclesum: data.expenses[0].cyclesum,
-                cyclediff: (1800 - data.expenses[0].cyclesum).toFixed(2)
-            });
+        this.refreshData();
     }
 
     render() {
@@ -47,12 +52,32 @@ export default class Shop extends React.Component {
                     <img src="icons/book.png" className="icon" onClick={this.props.showExpenses} />
                 </header>
                 <hr />
-                <p>
-                    Σ month: {monthsum} € | Δ month: {monthdiff} €
-                </p>
-                <p>
-                    Σ cycle: {cyclesum} € | Δ cycle: {cyclediff} €
-                </p>
+                <div>
+                    <div className="ui large label darkred">
+                        limit month:
+                        <div className="detail">300.00 €</div>
+                    </div>
+                    <div className="ui large label">
+                        Σ month:
+                        <div className="detail">{monthsum} €</div>
+                    </div>
+                    <div className="ui large label">
+                        Δ month:
+                        <div className="detail">{monthdiff} €</div>
+                    </div>
+                    <div className="ui large label darkred">
+                        limit cycle:
+                        <div className="detail">1800.00 €</div>
+                    </div>
+                    <div className="ui large label">
+                        Σ cycle:
+                        <div className="detail">{cyclesum} €</div>
+                    </div>
+                    <div className="ui large label">
+                        Δ cycle:
+                        <div className="detail">{cyclediff} €</div>
+                    </div>
+                </div>
                 <hr />
                 <img
                     src={this.state.showAdder ? "icons/cross.png" : "icons/plus.png"}

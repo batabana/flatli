@@ -71,9 +71,7 @@ export default class Dates extends React.Component {
                             className="dates"
                             style={{
                                 backgroundColor:
-                                    this.state.showAskSure && item.id == this.state.deleteId
-                                        ? "rgba(255,228,225,0.75)"
-                                        : "#FFFFFF"
+                                    this.state.showAskSure && item.id == this.state.deleteId ? "#c18ca2" : "#FFFFFF"
                             }}
                         >
                             <p>

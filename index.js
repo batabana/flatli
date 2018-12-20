@@ -264,6 +264,16 @@ app.get("/api/sum-expenses/", async (req, res) => {
     }
 });
 
+app.get("/api/delete-expense/:id", async (req, res) => {
+    try {
+        await db.deleteExpense(req.params.id);
+        res.json({ success: true });
+    } catch (err) {
+        console.log("error in get /api/delete-expense", err);
+        res.json({ success: false });
+    }
+});
+
 app.get("/logout", (req, res) => {
     req.session = null;
     res.redirect("/");

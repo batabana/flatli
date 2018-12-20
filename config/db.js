@@ -108,3 +108,9 @@ exports.getSumExpenses = async lastDate => {
     const { rows } = await db.query(query, [lastDate]);
     return rows;
 };
+
+exports.deleteExpense = async id => {
+    const query = `DELETE FROM expenses WHERE id = $1 RETURNING *`;
+    const { rows } = await db.query(query, [id]);
+    return rows;
+};

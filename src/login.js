@@ -53,16 +53,18 @@ export default class Login extends React.Component {
                         <hr />
                         <div className="user-login">{arrOfUsers}</div>
                     </div>
-                    <div>
-                        <Weather />
-                    </div>
-                    <div>
-                        <DvbMonitor />
-                    </div>
-                    <div>
-                        <Clock />
-                        <br />
-                        <img src="wifi-code.png" alt="QR-Code for WiFi" className="qr-code" />
+                    <div className="widgets">
+                        <div>
+                            <Clock />
+                            <br />
+                            <img src="wifi-code.png" alt="QR-Code for WiFi" className="qr-code" />
+                        </div>
+                        <div>
+                            <Weather />
+                        </div>
+                        <div>
+                            <DvbMonitor />
+                        </div>
                     </div>
                 </div>
             </div>
