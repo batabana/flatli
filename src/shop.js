@@ -66,15 +66,15 @@ export default class Shop extends React.Component {
                         <div className="detail">{monthdiff} €</div>
                     </div>
                     <div className="ui large label darkred">
-                        limit cycle:
+                        limit 6 month:
                         <div className="detail">1800.00 €</div>
                     </div>
                     <div className="ui large label">
-                        Σ cycle:
+                        Σ 6 month:
                         <div className="detail">{cyclesum} €</div>
                     </div>
                     <div className="ui large label">
-                        Δ cycle:
+                        Δ 6 month:
                         <div className="detail">{cyclediff} €</div>
                     </div>
                 </div>

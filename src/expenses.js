@@ -11,7 +11,7 @@ export default class Expenses extends React.Component {
 
     async refreshData() {
         const { data } = await axios.get("/api/all-expenses");
-        data.success && (await this.setState({ expenses: data.expenses }));
+        data.success && this.setState({ expenses: data.expenses });
     }
 
     async componentDidMount() {
