@@ -15,7 +15,7 @@ exports.getUserById = async id => {
 
 exports.getDateBatch = async (bottom, top) => {
     const query = `
-    SELECT *, (SELECT count(id) FROM dates) as count
+    SELECT *, (SELECT count(id) FROM dates WHERE "end" >= NOW() - INTERVAL '1 day') as count
     FROM
         (SELECT ROW_NUMBER() OVER (ORDER BY start ASC) AS row, *
         FROM dates
@@ -50,7 +50,7 @@ exports.getAllDrinks = async user => {
             SELECT COUNT(drink_id) FROM debts WHERE user_id = $1 AND debts.drink_id = drinks.id
         ) AS count
         FROM drinks
-        ORDER BY count DESC, name ASC;`;
+        ORDER BY count DESC, name ASC`;
     const { rows } = await db.query(query, [user]);
     return rows;
 };

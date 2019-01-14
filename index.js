@@ -52,7 +52,7 @@ if (process.env.NODE_ENV != "production") {
 
 // call to dvb api
 app.get("/api/public", async (req, res) => {
-    const stopID = "33000115"; // Wasaplatz
+    const stopID = "33000013"; // Albertplatz
     var timeOffset = 0;
     var numResults = 15;
 

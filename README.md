@@ -31,7 +31,7 @@ React single-page application for people living together in a flat share.
 
 ## Technologies
 
-HTML, CSS, JavaScript, React, Socket.io, Node.js, Express, PostgreSQL
+HTML, CSS, JavaScript, React, Node.js, Express, PostgreSQL
 
 ## Development
 
@@ -48,3 +48,19 @@ node index.js
 ```
 
 ## Preview
+
+### welcome page
+
+![welcome](screenshots/welcome.png)
+
+### main page
+
+![main](screenshots/main.png)
+
+### calendar modal
+
+![calendar](screenshots/calendar.png)
+
+### expenses modal
+
+![expenses](screenshots/expenses.png)

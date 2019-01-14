@@ -14,10 +14,13 @@ export default class Dates extends React.Component {
     }
 
     async getDates() {
-        const { data } = await axios.get("/api/dates/" + this.state.batch);
+        const { data } = await axios.get("/api/dates/" + this.state.batch);     
         data.success &&
+            data.dates.length ? 
             this.setState({
                 dates: data.dates
+            }) : this.setState({
+                dates: [{count: 0}]
             });
     }
 
@@ -64,7 +67,7 @@ export default class Dates extends React.Component {
                     <img src="icons/calendar.png" className="icon" onClick={this.props.showCalendar} />
                 </header>
                 <hr />
-                {this.state.dates.map(item => {
+                {this.state.dates[0].count ? this.state.dates.map(item => {
                     return (
                         <div
                             key={item.id}
@@ -106,7 +109,7 @@ export default class Dates extends React.Component {
                             </div>
                         </div>
                     );
-                })}
+                }) : "no upcoming dates"}
                 <hr />
                 <div className="icons">
                     {this.state.batch > 1 ? (

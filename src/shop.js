@@ -59,7 +59,7 @@ export default class Shop extends React.Component {
                     </div>
                     <div className="ui large label">
                         Σ month:
-                        <div className="detail">{monthsum} €</div>
+                        <div className="detail">{monthsum || "0.00"} €</div>
                     </div>
                     <div className="ui large label">
                         Δ month:
@@ -71,7 +71,7 @@ export default class Shop extends React.Component {
                     </div>
                     <div className="ui large label">
                         Σ 6 month:
-                        <div className="detail">{cyclesum} €</div>
+                        <div className="detail">{cyclesum || "0.00"} €</div>
                     </div>
                     <div className="ui large label">
                         Δ 6 month:
