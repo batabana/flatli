@@ -37,7 +37,7 @@ HTML, CSS, JavaScript, React, Node.js, Express, PostgreSQL
 
 -   Edit PostgreSQL database parameters in [db.js](config/db.js).
 -   Run files in [sql](sql) to initialize tables in database.
--   As long as there is no admin interface, populate `users` and `drinks` table directly in the datebase.
+-   As long as there is no admin interface, populate `users` and `drinks` table directly in the database.
 -   Set `process.env.COOKIE_SECRET` or edit cookie secret parameter directly in [index.js](index.js).
 -   Get keys for OpenWeatherMap and Giphy API, set them and all other API config in [index.js](index.js).
 
